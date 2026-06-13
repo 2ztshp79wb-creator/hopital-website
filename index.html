@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Hôpital Al Farabi - Maroc | Soins de santé d'excellence</title>
-    <!-- Chart.js CDN pour les graphiques -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <!-- Font Awesome 6 (gratuit) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -21,7 +19,7 @@
             color: #1e3c2c;
         }
 
-        /* HEADER & NAVIGATION */
+
         header {
             background: linear-gradient(135deg, #0b5e2e, #1e7b48);
             color: white;
@@ -70,7 +68,7 @@
             opacity: 0.85;
         }
 
-        /* sections */
+        
         .container {
             max-width: 1300px;
             margin: 30px auto;
@@ -110,7 +108,7 @@
             transform: scale(1.02);
         }
 
-        /* services cards */
+        
         .services, .stats-grid {
             display: flex;
             flex-wrap: wrap;
@@ -139,7 +137,7 @@
             margin-bottom: 10px;
         }
 
-        /* tableaux & graphiques */
+        
         .section-title {
             font-size: 1.8rem;
             margin: 40px 0 20px 0;
@@ -256,7 +254,7 @@
         <div class="card"><i class="fas fa-ambulance"></i><h3>Urgences</h3><p>Service rapide H24</p></div>
     </div>
 
-    <!-- SECTION STATISTIQUES + GRAPHIQUES -->
+    
     <div id="stats">
         <h2 class="section-title"><i class="fas fa-chart-line"></i> Analyse hospitalière 2025</h2>
         <div class="dashboard">
@@ -271,7 +269,7 @@
         </div>
     </div>
 
-    <!-- LISTE DES 30 MÉDECINS AVEC SPÉCIALITÉS -->
+    
     <div id="medecins">
         <h2 class="section-title"><i class="fas fa-user-md"></i> Nos médecins référents (30 spécialistes)</h2>
         <div class="doctor-list">
@@ -308,7 +306,7 @@
 </footer>
 
 <script>
-    // 1. Génération de 30 docteurs avec spécialités variées (noms marocains / international)
+    
     const specialitesList = [
         "Cardiologie", "Neurologie", "Pédiatrie", "Gynécologie", "Orthopédie", "Dermatologie", "Ophtalmologie",
         "ORL", "Psychiatrie", "Radiologie", "Anesthésie", "Urgences", "Médecine interne", "Oncologie", 
@@ -330,7 +328,7 @@
         });
     }
 
-    // 2. Génération de 5000 patients avec nom, age, sexe, doctor_responsable (parmi les 30)
+    
     const prenomsP = ["Mohamed", "Aicha", "Yassine", "Kawtar", "Othmane", "Hind", "Anas", "Meriem", "Idriss", "Nawal", "Rayan", "Ines", "Ali", "Soukaina", "Hamid", "Nour", "Salim", "Lamia", "Fouzia", "Mehdi", "Chaimae", "Salah", "Dounia", "Rachid", "Samira", "Hicham", "Ghizlane", "Abdelkader", "Mariam", "Zineb"];
     const nomsP = ["Elouardi", "Benali", "Mazouz", "Fikri", "Ghannam", "Doukkali", "Hamdani", "Bennis", "Slimani", "Tazi", "Naciri", "Alaoui", "Berrada", "Yousfi", "Kabbaj", "Wazzani", "Faouzi", "Hilali", "Mouline", "Bahia", "Rifai", "Serghini", "Moustaoui", "Touimi", "Bahmad", "Elmalki", "Haddaoui", "Lamarti", "Sedrati", "Moutawakil"];
 
@@ -363,7 +361,7 @@
     const allPatients = genererPatients(5000);
     let currentDisplayLimit = 100;   // pagination incrémentale
 
-    // remplir tableau médecins
+    
     function renderDoctors() {
         const tbody = document.getElementById("doctorTbody");
         tbody.innerHTML = "";
@@ -374,7 +372,7 @@
         });
     }
 
-    // rendre patients selon limite
+    
     function renderPatients(limit) {
         const tbody = document.getElementById("patientTbody");
         tbody.innerHTML = "";
@@ -394,8 +392,7 @@
         document.getElementById("rowCounter").innerText = `Affichage de ${slice.length} patients sur ${allPatients.length}`;
     }
 
-    // --- GRAPHIQUES ---
-    // 1. Histogramme âges : groupes [0-18, 19-35, 36-55, 56-75, 76+]
+    
     function computeAgeDistribution(patients) {
         let jeunes = 0, adultes = 0, mature = 0, senior = 0, tresSenior = 0;
         patients.forEach(p => {
@@ -408,10 +405,7 @@
         return [jeunes, adultes, mature, senior, tresSenior];
     }
 
-    // 2. Générer visites par mois (sur une année) basé sur un modèle réaliste : nombre visites = patients * facteur saisonnier
-    // On simule 12 mois avec tendance: pic janvier, avril, septembre et décembre, bas en été? 
-    // Pour être crédible, on génère des visites totales variant entre 3800 et 5200 par mois
-    // On utilise allPatients.length = 5000, on applique un pattern saisonnier
+    
     function generateMonthlyVisits(patientsCount) {
         const baseVisitsPerMonth = [];
         const pattern = [0.9, 0.85, 0.95, 1.05, 1.0, 0.8, 0.75, 0.85, 1.1, 1.15, 1.05, 1.2]; // facteur multiplicatif
@@ -445,7 +439,7 @@
             options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'top' } } }
         });
 
-        // Visites mensuelles 
+        
         visitsData = generateMonthlyVisits(allPatients.length);
         const visitCtx = document.getElementById('visitsChart').getContext('2d');
         if (visitsChartInstance) visitsChartInstance.destroy();
@@ -467,7 +461,7 @@
         });
     }
 
-    // Initialisation et pagination patient 
+    
     document.getElementById("loadMoreBtn").addEventListener("click", () => {
         if (currentDisplayLimit + 100 <= allPatients.length) {
             currentDisplayLimit += 100;
@@ -480,19 +474,18 @@
         renderPatients(currentDisplayLimit);
     });
 
-    // first render
+    
     renderDoctors();
     renderPatients(currentDisplayLimit);
     initCharts();
 
-    // Pour plus de réalisme, rafraîchir les graphes si nécessaire (stable) 
-    // Ajouter une petite fonction de réinitialisation dynamique (on pourrait laisser stable)
+    
     window.addEventListener('resize', () => {
         if (ageChartInstance) ageChartInstance.resize();
         if (visitsChartInstance) visitsChartInstance.resize();
     });
 
-    // Petit bonus: au clic sur les onglets on peut scroll en douceur
+    
     document.querySelectorAll('nav a').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const hash = this.getAttribute('href');
